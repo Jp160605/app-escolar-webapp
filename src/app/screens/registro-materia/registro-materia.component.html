@@ -1,0 +1,27 @@
+<div class="wrapper"  main-content >
+	<div class="reg-shell">
+		<mat-card class="role-card">
+			<mat-card-header class="role-card-header">
+				<div class="actions-header-colum">
+					<mat-card-title class="title-card">Registro de Materia</mat-card-title>
+					<mat-card-subtitle class="subtitle-card">Ingresa los datos de la materia</mat-card-subtitle>
+				</div>
+				<div class="actions-row">
+					<button mat-icon-button class="back-btn" (click)="goBack()">
+						<mat-icon class="back-icon">arrow_back</mat-icon>
+					</button>
+				</div>
+			</mat-card-header>
+			<mat-card-content>
+				<div class="role-row">
+					<!-- Aquí iría info adicional si se requiere -->
+				</div>
+			</mat-card-content>
+		</mat-card>
+
+		<div class="forms-area">
+			<!-- Render partial only when not editing (new) or when materiaData is available (editing) -->
+			<app-registro-materia *ngIf="!editar || (editar && materiaData)" [editar]="editar" [datos_materia]="materiaData"></app-registro-materia>
+		</div>
+	</div>
+</div>

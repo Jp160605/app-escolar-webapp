@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="icon-close">
+    <button class="btn" (click)="cerrar_modal()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="body-modal">
+    <h1 class="title-modal">Editar {{ rol }}</h1>
+    <span class="descripcion">¿Deseas editar este {{ rol }}? Se abrirá el formulario de edición.</span>
+    <div class="buttons-modal">
+      <button mat-button class="btn-cancelar" (click)="cerrar_modal()">
+        Cancelar
+      </button>
+      <button mat-button class="btn-editar" (click)="confirmarEditar()">
+        Editar
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="wrapper">
+  <div class="section-registro">
+    <div class="body-registro">
+
+      <div class="row mt-3 mb-3" style="width: 100%;">
+        <div class="col-12">
+          <label class="title-user">Datos de la Materia</label>
+        </div>
+      </div>
+
+      <!-- NRC y Sección -->
+      <div class="row" style="width: 100%;">
+        <div class="col-md-6">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>NRC (5 dígitos)</mat-label>
+            <input matInput [(ngModel)]="materia.nrc" (keypress)="soloNumeros($event)" maxlength="5" placeholder="Ej: 12345">
+          </mat-form-field>
+          <div *ngIf="errors.nrc" class="invalid-feedback">{{ errors.nrc }}</div>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Sección (Max 3 dígitos)</mat-label>
+            <input matInput [(ngModel)]="materia.seccion" (keypress)="soloNumeros($event)" maxlength="3" placeholder="Ej: 001">
+          </mat-form-field>
+          <div *ngIf="errors.seccion" class="invalid-feedback">{{ errors.seccion }}</div>
+        </div>
+      </div>
+
+      <!-- Nombre -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Nombre de la Materia</mat-label>
+        <input matInput [(ngModel)]="materia.nombre" (keypress)="soloLetras($event)" placeholder="Ej: Programación Web">
+      </mat-form-field>
+      <div *ngIf="errors.nombre" class="invalid-feedback">{{ errors.nombre }}</div>
+
+      <!-- Programa Educativo -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Programa Educativo</mat-label>
+        <mat-select [(ngModel)]="materia.programa_educativo">
+          <mat-option *ngFor="let prog of programas" [value]="prog.value">
+            {{ prog.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.programa_educativo" class="invalid-feedback">{{ errors.programa_educativo }}</div>
+
+      <!-- Días (Checkboxes) -->
+      <div class="select-materias mt-3 mb-3">
+        <label class="title-materias mb-2">Días de clase:</label>
+        <div class="row">
+          <div class="col-6 col-md-4" *ngFor="let dia of dias_semana">
+            <mat-checkbox
+              class="checkbox-item"
+              [value]="dia.value"
+              (change)="checkboxChange($event)"
+              [checked]="revisarSeleccion(dia.value)">
+              {{ dia.nombre }}
+            </mat-checkbox>
+          </div>
+        </div>
+        <div *ngIf="errors.dias_json" class="invalid-feedback">{{ errors.dias_json }}</div>
+      </div>
+
+      <!-- Horario con TimePicker en Español -->
+      <div class="row" style="width: 100%;">
+        <div class="col-md-6">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Hora Inicio</mat-label>
+            <input matInput [ngxTimepicker]="pickerInicio" [format]="24" [(ngModel)]="materia.hora_inicio" placeholder="Selecciona hora" readonly>
+            <ngx-material-timepicker-toggle matSuffix [for]="pickerInicio">
+              <mat-icon matDatepickerToggleIcon>access_time</mat-icon>
+            </ngx-material-timepicker-toggle>
+
+            <!-- AQUI SE USAN LAS VARIABLES DEL TS -->
+            <ngx-material-timepicker #pickerInicio
+                [theme]="timePickerTheme">
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Hora Fin</mat-label>
+            <input matInput [ngxTimepicker]="pickerFin" [format]="24" [(ngModel)]="materia.hora_fin" placeholder="Selecciona hora" readonly>
+            <ngx-material-timepicker-toggle matSuffix [for]="pickerFin">
+              <mat-icon matDatepickerToggleIcon>access_time</mat-icon>
+            </ngx-material-timepicker-toggle>
+
+            <!-- AQUI SE USAN LAS VARIABLES DEL TS -->
+            <ngx-material-timepicker #pickerFin
+                [theme]="timePickerTheme">
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="errors.horario" class="invalid-feedback">{{ errors.horario }}</div>
+
+      <!-- Salón y Créditos -->
+      <div class="row mt-2" style="width: 100%;">
+        <div class="col-md-8">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Salón (Max 15 caracteres)</mat-label>
+            <input matInput [(ngModel)]="materia.salon" maxlength="15" placeholder="Ej: CC101">
+          </mat-form-field>
+          <div *ngIf="errors.salon" class="invalid-feedback">{{ errors.salon }}</div>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="mat-input" appearance="outline">
+            <mat-label>Créditos</mat-label>
+            <input matInput [(ngModel)]="materia.creditos" (keypress)="soloNumeros($event)" maxlength="2" placeholder="Ej: 8">
+          </mat-form-field>
+          <div *ngIf="errors.creditos" class="invalid-feedback">{{ errors.creditos }}</div>
+        </div>
+      </div>
+
+      <!-- Profesor (Select) -->
+      <mat-form-field class="mat-input" appearance="outline">
+        <mat-label>Profesor Asignado</mat-label>
+        <mat-select [(ngModel)]="materia.profesor">
+          <mat-option *ngFor="let profe of lista_maestros" [value]="profe.id">
+            {{ profe.nombreCompleto }} ({{ profe.id_trabajador }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="errors.profesor" class="invalid-feedback">{{ errors.profesor }}</div>
+
+      <!-- Botones -->
+      <div class="section-buttons mt-4">
+        <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
+        <button *ngIf="!editar" class="btn btn-primary" (click)="registrar()">Registrar</button>
+        <button *ngIf="editar" class="btn btn-primary" (click)="actualizar()">Actualizar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

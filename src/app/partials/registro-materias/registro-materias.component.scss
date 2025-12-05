@@ -1,0 +1,184 @@
+// =========================
+// ESTRUCTURA PRINCIPAL
+// =========================
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.section-registro {
+  // Aquí mantenemos el ancho del 90% para dar el espaciado global
+  // que maneja tu identidad visual, centrando todo el bloque.
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.body-registro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 2.5rem;
+  gap: 1.5rem;
+  background: #fff;
+}
+
+// =========================
+// TIPOGRAFÍA Y TÍTULOS
+// =========================
+.title-user {
+  font-size: 28px;
+  text-align: left;
+  font-family: Nexa-Bold, sans-serif;
+  letter-spacing: 2px;
+  color: #231F20;
+  text-transform: capitalize;
+  opacity: 1;
+  // Eliminamos el margen forzado para que se alinee con el grid
+  margin-left: 0;
+  padding-left: 0.5rem; // Pequeño ajuste visual si es necesario
+}
+
+.title-materias {
+  font-size: 18px;
+  font-family: Nexa-Bold, sans-serif;
+  color: #231F20;
+  margin-bottom: 10px;
+  display: block;
+}
+
+// =========================
+// INPUTS Y FORMULARIOS
+// =========================
+mat-form-field {
+  // CAMBIO CLAVE: Usar 100% del ancho de la columna padre
+  width: 100% !important;
+  margin-left: 0 !important; // Eliminamos el desplazamiento
+  text-align: left !important;
+  display: block; // Asegura comportamiento de bloque
+}
+
+// Estilos específicos para la sección de selección de días
+.select-materias {
+  width: 100%; // Ocupa todo el ancho disponible en la fila
+  margin-left: 0;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-sizing: border-box; // Asegura que el padding no rompa el ancho
+}
+
+.checkbox-item {
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #222;
+  white-space: nowrap; // Evita que el texto se rompa feo en espacios pequeños
+}
+
+.mat-hint-margin {
+  margin-bottom: 1rem;
+}
+
+.invalid-feedback {
+  // Ajuste para que el mensaje de error se alinee con el input
+  margin-left: 0;
+  color: #dc3545;
+  font-size: 0.875em;
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+// =========================
+// BOTONES
+// =========================
+.section-buttons {
+  width: 100%; // Full width del contenedor
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; // Separa Cancelar (izq) y Guardar (der)
+  align-items: center;
+  padding-bottom: 3rem;
+  gap: 1rem; // Espacio entre botones si la pantalla se encoge
+}
+
+.btn-primary {
+  width: 208px;
+  height: 48px;
+  background-color: #0092B8 !important;
+  border-color: #0092B8 !important;
+  border-radius: 8px !important;
+  opacity: 1;
+  text-align: center;
+  font-family: Nexa-Bold, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: #017895 !important;
+  border-color: #017895 !important;
+}
+
+.btn-danger {
+  width: 208px;
+  height: 48px;
+  border-radius: 8px !important;
+  opacity: 1;
+  text-align: center;
+  font-family: Nexa-Bold, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+}
+
+// =========================
+// RESPONSIVE
+// =========================
+@media (max-width: 700px) {
+  .title-user {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    white-space: normal;
+    padding-left: 0;
+  }
+
+  .title-materias {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .select-materias {
+    padding-left: 1rem;
+  }
+
+  // En móvil, los botones ocupan todo el ancho y se apilan
+  .btn-primary,
+  .btn-danger {
+    width: 100%;
+    font-size: 14px;
+    height: 48px;
+  }
+
+  .section-buttons {
+    flex-direction: column-reverse; // Pone "Registrar" arriba y "Cancelar" abajo visualmente (opcional) o normal
+    gap: 1rem;
+  }
+}
