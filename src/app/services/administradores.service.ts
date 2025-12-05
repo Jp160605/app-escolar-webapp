@@ -115,7 +115,7 @@ export class AdministradoresService {
     } else {
       headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     }
-    return this.http.post<any>(`${environment.url_api}/admin/`, data, { headers });
+    return this.http.post<any>(`${environment.url_api}'api-admin-create/`, data, { headers });
   }
 
   // Petición para obtener la lista de administradores
